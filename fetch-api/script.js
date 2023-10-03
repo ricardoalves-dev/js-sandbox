@@ -44,3 +44,24 @@ fetch('https://jsonplaceholder.typicode.com/posts', {
 })
   .then((response) => response.json())
   .then((data) => console.log(data));
+
+// ********** LIDANDO COM ERROS ********** //
+
+// Por padrão um catch no fetch detecta apenas erro de falha de conexão
+fetch('https://httpstat.us/404')
+  .then((response) => response)
+  .then(() => console.log('Em caso de erro isso não devia executar'))
+  .catch((error) => console.log(`Houve um erro na requisição: ${error}`));
+
+// Para tratar erros numa requisição é necessário testar o retorno já no primeiro then (onde vem o objeto response)
+// Por padrão um catch no fetch detecta apenas erro de falha de conexão
+fetch('https://httpstat.us/404')
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+
+    return response.json();
+  })
+  .then(() => console.log('Em caso de erro isso não devia executar'))
+  .catch((error) => console.log(`Houve um erro na requisição: ${error}`));
