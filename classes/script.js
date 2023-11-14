@@ -8,6 +8,7 @@ class Pessoa {
   }
 
   // Métodos de uma classe não precisam da declaração function
+  // Métodos de uma classe irão ficar sempre no Prototype
   getAge() {
     return Math.floor(
       (new Date() - this.birthdayDate) / (1000 * 60 * 60 * 24 * 365.25)
